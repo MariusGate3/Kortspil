@@ -12,8 +12,8 @@ int win = 0;
 
 void setup()
 {
-  int myX = 200; 
-  int myY = 380; 
+  int myX = 500; 
+  int myY = 550; 
   int myFv = 0;
   int count = 1;
   size(1920,1080); 
@@ -30,13 +30,13 @@ void setup()
     {
      count =1;
     }
-    if (myX<800)
+    if (myX<1600)//bestemmer hvor mange kort som sidder ovenpå hinanden
     {
-      myX +=200;
-    } else if (myX > 800)
-    {
-      myX=200;
-      myY=380;
+      myX +=200;//x afstand mellem kortene
+    } 
+    if(i==3){
+    myY-=400;
+    myX-=800;
     }
     
   }
@@ -52,6 +52,7 @@ void setup()
 
 void draw()
 {
+  
   for (int i = 0; i<8; i++)
   {
     myCard[i].display();
@@ -87,3 +88,22 @@ void shuffle()
     fv[rand] = temp;
   }
 }
+void mouseClicked()
+{
+  for(int i =0; i<8; i++)
+  {
+    if(mouseX> x[i] && mouseX<(x[i]+105) && > y[i] && mouseY< y[i]+140 && (clicked[i]==false))
+    {
+      myCard[i].displayFront();
+      clicked[i] = true; 
+      cardUp[flipped] = i;
+      
+      flipped ++;
+      
+      if (flipped == 2) 
+      {
+        flipped = 0; 
+        println("0; ", fv[cardUp[0]]);
+        println("1; ", fv[cardUp[1]]);
+        
+        
